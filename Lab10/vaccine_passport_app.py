@@ -4,8 +4,7 @@ ID: {364211760028}
 Grop: {MIT211}
 """
 
-
-from model import Person, Student, Vaccine, VaccinatedPassport
+from model import Student,Vaccine,VaccinatedPassport,Employee
 
 def display_vaccine():
     n = 1
@@ -37,9 +36,11 @@ def input_person():
 def input_student():
     id = input('Student ID: ')
     major = input('Major: ')
-
     return id,major
 
+def input_employee():
+    position = input('Position: ')
+    return position
 
 def input_vaccine():
     num = int(input('How many your vaccinated ? : '))
@@ -63,12 +64,17 @@ def input_vaccine():
 
 
 if __name__ == '__main__':
+    print('Enter your information: ')
     p = input_person()
 
-    s = input_student()
-    #print(type(s),s)
-    s = Student(p[0], p[1], p[2], p[3], s[0], s[1])
-    #s.__str__()
+    x = input('Are you Student(s) or Employee(e) :: (s/e): ?')
+    if x.lower() == 's':
+        s = input_student()
+        s = Student(p[0], p[1], p[2], p[3], s[0], s[1])
+    else:
+        position = input_employee()
+        s = Employee(p[0], p[1], p[2], p[3],position)
+
     v_s = VaccinatedPassport(s)
     v_s.add_vaccinated(input_vaccine())
 

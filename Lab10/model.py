@@ -3,7 +3,6 @@ Name: {Supinya Sricharoen}
 ID: {364211760028}
 Grop: {MIT211}
 """
-
 class Person:
     def __init__(self,name,age,weight,height):
         # object attributes
@@ -55,6 +54,7 @@ class Student(Person):
         self.__major = major
 
     def __str__(self):
+        print('MT Vaccinated Passport (Student):')
         super().__str__()
         print(f'\tSID: {self.__id}\n'
               f'\tMajor: {self.__major}\n')
@@ -84,11 +84,10 @@ class VaccinatedPassport():
         self.vaccinated = vaccine
 
     def __str__(self):
-        print('MT Vaccinated Passport :')
+
         self.owner.__str__()
         for x in self.vaccinated:
             print(f'\tvaccine {self.vaccinated.index(x)+1}: {x[0].get_vaccine()}  \t\tdate: {x[1]}')
-
 
 class Employee(Person):
     def __init__(self,name,age,weight,height,position):
@@ -101,5 +100,9 @@ class Employee(Person):
         self.__position = position
 
     def __str__(self):
+        print('MT Vaccinated Passport (Employee):')
         super().__str__()
         print(f'\tPosition: {self.__position}\n')
+
+
+print('Hello, from model.')
