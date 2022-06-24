@@ -1,113 +1,66 @@
 """
-Name: {Supinya Sricharoen}
-ID: {364211760028}
-Grop: {MIT211}
+Student Name: Supinya Sricharoen
+ID: 364211760028
+Grop: MIT211
 """
+from Final2 import Person,Student,Employee,Courses,CourseRegistration
+display_Courses():
+    n = 1
+    for x in Courses.all_courses:
+        print(f'\t{n}. {x} ')
+        n += 1
 
-class Person:
-    def __init__(self,name,email,tel):
-        # object attributes
-        self.__name = name  # private member
-        self.__email = email
-        self.__tel = tel
+def input_person():
+    name = input('Name: ')
 
-# getter and setter method
-    def get_name(self):
-        return self.__name
-    def set_name(self, new_name):
-        self.__name = new_name
-    def get_email(self):
-        return self.__email
-    def set_email(self, new_email):
-        self.__email = new_email
-    def get_tel(self):
-        return self.__tel
-    def set_tel(self, new_tel):
-        self.__tel = new_tel
+    email = input(input('Email: '))
+    tel = float(input('Tel : '))
 
-# display Person object
-    def __str__(self):
-        print(f'\tName: {self.__name}\n'
-                  f'\tEmail: {self.__email}\n'
-                  f'\tTel: {self.__tel}\n')
+    return name,email,tel
 
-class Student(Person):
-    def __init__(self,name,email,tel,sid,major):
-        super().__init__(name,email,tel)
-        #Person.__init__(self,name,email,tel)
-        self.__sid = sid
-        self.__major = major
+def input_student():
+    id = input('Student ID: ')
+    major = input('Major: ')
+    return id,major
 
-    # getter and setter
-    def get_id(self):
-        return  self.__sid
-    def set_id(self, new_sid):
-        self.__sid = new_sid
-    def get_major(self):
-        return  self.__major
-    def set_major(self, new_major):
-        self.__major = new_major
+def input_employee():
+    position = input('Position: ')
+    return position
 
-    def __str__(self):
-        print(' ')
-        super().__str__()
-        print(f'\tSID: {self.__sid}\n'
-              f'\tMajor: {self.__major}\n')
+def input_courses():
+    num = int(input('How many your Courses? : '))
+    def validate_regis(a):
+        if a <= 3:
+            return True
+        else:
+            return False
+        while True:
+            regis = int(input('regis: '))
+            if validate_regis(regis):
+                break
+            else:
+                print('สามารถลงทะเบียนกิจกรรมได้มากกว่า 1 กิจกรรม แต่ไม่เกิน 3 กิจกรรม')
 
-class Employee(Person):
-    def __init__(self,name,email,tel,eid,position):
-        super().__init__(name,email,tel)
-        self.__eid = eid
-        self.__position = position
+    course_date = list()
 
-    def get_eid(self):
-        return self.__eid
-    def set_eid(self,new_eid):
-        self.__eid = new_eid
-    def get_position(self):
-        return self.__position
-    def set_position(self,new_position):
-        self.__position = new_position
+    for x in range(num):
+        display_Courses()
+        n = len(Courses.all_courses)
+        while True:
+            select = int(input(f'select(1-{n}): '))
+            if select >= 1 and select <= n:
+                break
+            print(f'Please, enter number 1-{n} only.')
 
-    def __str__(self):
-        print(' ')
-        super().__str__()
-        print(f'\tEid: {self.__eid}\n')
-        print(f'\tPosition: {self.__position}\n')
+        course_date.append([Courses(Courses.all_courses[select - 1])])
 
-class Courses():
+    return course_date
 
-    all_courses = ['Digital Marketing for Small Business',
-                   'Accounting for SME', 'Chatbot for E-Commerce',
-                   'Data Analytics for Small Business']
+if _name_ == '_main_':
+    print('Enter your information: ')
+    p = input_person()
+    s = input_student()
 
-    def __init__(self,courses_id,courses_name):
-        self.__courses_id = courses_id
-        self.__courses_name = courses_name
-
-    #getter and setter method
-    def get_courses01(self):
-        return self.__courses_id
-    def set_courses01(self,new_id):
-        self.__courses_id = new_id
-    def get_courses(self):
-        return self.__courses_name
-    def set_courses(self,new_name):
-        self.__courses_name = new_name
-
-    def __str__(self):
-        print(f'ID: {self.__courses_id}')
-        print(f'Courses name: {self.__courses_name}')
-
-class CourseRegistration():
-    def __init__(self, id):
-        self.id = id
-        self.course_regis = list()
-
-    def add_course(self,course):
-        self.course = course
-
-    def __str__(self):
-        self.id.__str__()
-        for x in self.course:
-            print(f'\tcourse {self.course.index(x)+1}: {x[0].get_course()}  \t\tdate: {x[1]}')
+    c_s = CourseRegistration(s)
+    c_s.add_course(input_courses())
+    c_s.__str__()
